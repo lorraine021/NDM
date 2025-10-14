@@ -7,4 +7,4 @@ We uncover two key insights into noises for safe text-to-image generation: **the
 
 ## 🚀 News
 
-- **2025.07**: 🌟 This paper is accepted by ACMMM2025!
+- **2025.07**: 🌟 Our paper "NDM: A Noise-driven Detection and Mitigation Framework against Implicit Sexual Intentions in Text-to-Image Generation" is accepted by ACMMM2025!
