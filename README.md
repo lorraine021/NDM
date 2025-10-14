@@ -44,6 +44,11 @@ We uncover two key insights into noises for safe text-to-image generation: **the
 python run_ndm.py
 ```
 
+### Evaluation
+```bash
+python metric.py
+```
+
 ## Contributing
 We welcome contributions! Please submit issues or pull requests for bug fixes, features, or documentation enhancements.
 
