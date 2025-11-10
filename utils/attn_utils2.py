@@ -26,9 +26,9 @@ def fn_smoothing_func(attention_map):
 
 
 def fn_get_otsu_mask(x: torch.Tensor) -> torch.Tensor:
-    x_float = x.float()  # Converts to float32 if needed
+    x_float = x.float() 
     threshold = torch.quantile(x_float.view(-1), 0.8)
-    otsu_mask = (x >= threshold).to(dtype=x.dtype)  # Keep original dtype
+    otsu_mask = (x >= threshold).to(dtype=x.dtype)  
     return otsu_mask
     
 
@@ -49,20 +49,17 @@ def fn_clean_mask(otsu_mask: torch.Tensor, x0: torch.Tensor, y0: torch.Tensor) -
     device = otsu_mask.device
     dtype = otsu_mask.dtype
 
-    # Create coordinate grids
     y_coords = torch.arange(H, device=device, dtype=torch.float32)
     x_coords = torch.arange(W, device=device, dtype=torch.float32)
-    yy, xx = torch.meshgrid(y_coords, x_coords, indexing='ij')  # (H, W)
+    yy, xx = torch.meshgrid(y_coords, x_coords, indexing='ij')  
 
-    dy = yy - x0.float()  # x0 is row index → y-coordinate
-    dx = xx - y0.float()  # y0 is col index → x-coordinate
+    dy = yy - x0.float()  
+    dx = xx - y0.float() 
     dist_sq = dx * dx + dy * dy
 
-    # Circular mask with radius 8 (adjustable)
     radius = 8.0
     circular_mask = (dist_sq <= radius * radius).to(dtype=dtype)
 
-    # Combine with Otsu mask
     ret_mask = otsu_mask * circular_mask
     return ret_mask
 

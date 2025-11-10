@@ -6,7 +6,6 @@ import numpy as np
 import torch
 from torch.nn import functional as F
 
-# from diffusers.models.attention_processor import Attention
 from diffusers.models.attention_processor import Attention, AttentionProcessor
 
 class AttentionStore:
@@ -18,17 +17,13 @@ class AttentionStore:
     def __call__(self, attn, is_cross: bool, place_in_unet: str):
         key = f"{place_in_unet}_{'cross' if is_cross else 'self'}"
         if self.cur_att_layer >= 0:
-            # print(attn.shape[1],np.prod(self.attn_res))
             # Check if the attention map matches the expected resolution
             H, W = self.attn_res          # (96, 96)
             H = H / 4
             W = W / 4
-            # print(H,W,attn.shape[1])
-            if attn.shape[1] == H * W:    # 只有 Q == 9216 才保存
+            if attn.shape[1] == H * W:   
                 self.step_store[key].append(attn)
-            # if attn.shape[1] == np.prod(self.attn_res):
-                # self.step_store[key].append(attn)
-
+          
         self.cur_att_layer += 1
         if self.cur_att_layer == self.num_att_layers:
             self.cur_att_layer = 0
@@ -40,7 +35,6 @@ class AttentionStore:
 
     def get_average_attention(self):
         average_attention = self.attention_store
-        # print("get:",average_attention)
         return average_attention
 
   
@@ -50,12 +44,10 @@ class AttentionStore:
         out = []
         attention_maps = self.get_average_attention()
         
-        # print("Debugging attention map sizes:")
         for location in from_where:
             key = f"{location}_{'cross' if is_cross else 'self'}"
             if key in attention_maps and len(attention_maps[key]) > 0:
                 for i, item in enumerate(attention_maps[key]):
-                    # print(f"Map {i}: shape={item.shape}, total_elements={item.numel()}")
                     
                     batch_heads, seq_len, target_len = item.shape
                     H = W = int(seq_len ** 0.5)
@@ -100,7 +92,7 @@ class AttentionStore:
         self.curr_step_index = 0
         self.attn_res = attn_res  # Expected resolution of attention maps
 
-    def step_end(self): # 新添加
+    def step_end(self): 
         self.attention_store = self.step_store
         self.step_store = self.get_empty_store()
 
@@ -129,13 +121,6 @@ class AttendExciteAttnProcessor:
         query = attn.head_to_batch_dim(query)
         key = attn.head_to_batch_dim(key)
         value = attn.head_to_batch_dim(value)
-        # print("=== DEBUG: Attention Scores Calculation ===")
-        # print(f"query shape: {query.shape}")      # 应该是 (batch * heads, seq_len, head_dim)
-        # print(f"key shape: {key.shape}")          # 应该是 (batch * heads, seq_len, head_dim)
-        # print(f"attention_mask shape: {attention_mask.shape if attention_mask is not None else 'None'}")
-        # print(f"query dtype: {query.dtype}, key dtype: {key.dtype}")
-        # print(f"query ndim: {query.ndim}, key ndim: {key.ndim}")
-        
         attention_probs = attn.get_attention_scores(query, key, attention_mask)
 
         # Store attention maps if they require gradients (during Attend and Excite process)

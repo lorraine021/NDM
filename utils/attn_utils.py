@@ -35,12 +35,10 @@ def fn_show_attention(
 
     cross_attention_map_list, self_attention_map_list = [], []
 
-    # cross attention map preprocessing
     cross_attention_maps = cross_attention_maps[:, :, 1:-1]
     cross_attention_maps = cross_attention_maps * 100
     cross_attention_maps = torch.nn.functional.softmax(cross_attention_maps, dim=-1)
 
-    # Shift indices since we removed the first token
     indices = [index - 1 for index in indices]
 
     for i in indices:
@@ -76,7 +74,6 @@ def fn_show_attention(
         
         self_attention_map_list.append(norm_self_attention_map_per_token)
 
-    # tensor to numpy
     cross_attention_map_numpy       = torch.cat(cross_attention_map_list, dim=0).cpu().detach().numpy()
     self_attention_map_numpy        = torch.cat(self_attention_map_list, dim=0).cpu().detach().numpy()
 
@@ -90,9 +87,9 @@ def fn_show_attention(
 
 
 def fn_get_otsu_mask(x: torch.Tensor) -> torch.Tensor:
-    x_float = x.float()  # Converts to float32 if needed
+    x_float = x.float()  
     threshold = torch.quantile(x_float.view(-1), 0.8)
-    otsu_mask = (x >= threshold).to(dtype=x.dtype)  # Keep original dtype
+    otsu_mask = (x >= threshold).to(dtype=x.dtype)  
     return otsu_mask
 
 
