@@ -43,7 +43,7 @@ We uncover two key insights into noises for safe text-to-image generation: **the
 
    For the U-Net architecture mitigation (located in the UNET folder), an external API is required.
 
-    - Location: UNET/text.py
+    - Location: text.py
 
     - Action: You must set your API_SECRET_KEY and BASE_URL within this file to enable the full mitigation functionality.
 
