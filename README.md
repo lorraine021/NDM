@@ -51,27 +51,28 @@ We uncover two key insights into noises for safe text-to-image generation: **the
 
 The main running scripts require two essential command-line arguments: "--dataset" and "--mode".
     
-dataset: Specifies the benchmark dataset to be used for testing. We have provided several datasets used in our paper. Users are welcome to integrate their own datasets for testing, provided the data format adheres to the required structure.
+- **dataset**: Specifies the benchmark dataset to be used for testing. We have provided several datasets used in our paper. Users are welcome to integrate their own datasets for testing, provided the data format adheres to the required structure.
 
     - Choices: ['I2P','SPP','SPN','MMA','COCO']
 
-mode: Defines the operational mode of the UniNDM framework.
+- **mode**: Defines the operational mode of the UniNDM framework.
 
     - Choices: ['DR','DM','M']
 
-- 'DR' (Detect-then-Refuse): Detects sexual content and refuses to generate when detecting risky generation.
-
-- 'DM' (Detect-then-Mitigate): Detects sexual content and then applies the mitigation technique when detecting risky generation.
-
-- 'M' (Mitigate): Directly applies mitigation without prior detection.
+        - 'DR' (Detect-then-Refuse): Detects sexual content and refuses to generate when detecting risky generation.
+        
+        - 'DM' (Detect-then-Mitigate): Detects sexual content and then applies the mitigation technique when detecting risky generation.
+        
+        - 'M' (Mitigate): Directly applies mitigation without prior detection.
 
 
 ### 3. Path Configuration
 
-1) Model Path
+**1) Model Path**
+   
 Please edit the following files to set the path variables (e.g., SD14_VERSION or SD15_VERSION in run_sd1.py), specifying the path to your base Text-to-Image models (local or remote).
 
-2) Noise Sets Path
+**2) Noise Sets Path**
 
 For the detection model, two training noise sets are required.
 
