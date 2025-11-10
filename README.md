@@ -30,8 +30,8 @@ We uncover two key insights into noises for safe text-to-image generation: **the
 ### Setup
 #### 1. Clone the repository:
    ```bash
-   git clone https://github.com/Aries-iai/UniNDM.git
-   cd UniNDM
+   git clone https://github.com/lorraine021/NDM.git
+   cd NDM
    ```
 #### 2. Install dependencies:
    ```bash
