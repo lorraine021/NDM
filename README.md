@@ -83,18 +83,15 @@ For the detection model, two training noise sets are required.
 
 ### SDv1.4 / SDv1.5
 ```bash
-cd UNET
 python run_sd1.py --dataset xx --mode xx
 ```
 
 ### SDv2.1
 ```bash
-cd UNET
 python run_sd2.py --dataset xx --mode xx
 ```
 **Example:** Running in 'Detect-then-Mitigate' mode on the 'I2P' dataset on SDv2.1
 ```bash
-cd UNET
 python run_sd2.py --dataset I2P --mode DM
 ```
 
