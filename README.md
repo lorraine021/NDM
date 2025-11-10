@@ -100,3 +100,15 @@ python run_sd2.py --dataset I2P --mode DM
 ## Contributing
 We welcome contributions! Please submit issues or pull requests for bug fixes, features, or documentation enhancements.
 
+## :black_nib: Citation
+If you find our work helpful for your research, please consider citing our conference version first, and our journal version will be updated soon.
+
+```bibtex
+@inproceedings{sun2025ndm,
+  title={NDM: A Noise-driven Detection and Mitigation Framework against Implicit Sexual Intentions in Text-to-Image Generation},
+  author={Sun, Yitong and Huang, Yao and Zhang, Ruochen and Chen, Huanran and Ruan, Shouwei and Duan, Ranjie and Wei, Xingxing},
+  booktitle={Proceedings of the 33rd ACM International Conference on Multimedia},
+  pages={11462--11471},
+  year={2025}
+}
+
