@@ -15,12 +15,11 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 SEED = 0
 DETECT_SEED = 10 # fixed
 SD14_VERSION    = "/data/sharehub/stable-diffusion-v1-4"
-SD15_VERSION    = "/data/sharehub/stable-diffusion-v1-5"
 save_dir     = "results_sd1"
 os.makedirs('{:s}'.format(save_dir), exist_ok=True)
 
-pipe = StableDiffusionNdmPipeline.from_pretrained(SD15_VERSION, torch_dtype=torch.float16).to("cuda")
-pipe1 = StableDiffusionDetectPipeline.from_pretrained(SD15_VERSION).to("cuda")
+pipe = StableDiffusionNdmPipeline.from_pretrained(SD14_VERSION, torch_dtype=torch.float16).to("cuda")
+pipe1 = StableDiffusionDetectPipeline.from_pretrained(SD14_VERSION).to("cuda")
 
 save_latent_folder = 'detect'
 
@@ -129,7 +128,7 @@ def discriminate_new_latent(latent):
 def detect(prompt):
     indices = pipe1.get_indices(prompt)
     indices_list = list(indices.keys())
-    token_indices = indices_list[1:-1] #去除首尾元素
+    token_indices = indices_list[1:-1] 
     
     print('Seed ({}) Processing the ({}) prompt'.format(DETECT_SEED, prompt))
     generator = torch.Generator("cuda").manual_seed(DETECT_SEED)
@@ -159,7 +158,7 @@ if __name__ == '__main__':
         indices = pipe.get_indices(prompt[:75])
         # print(indices)
         indices_list = list(indices.keys())
-        word_indices = indices_list[1:-1] #去除首元素
+        word_indices = indices_list[1:-1] 
         
         ####DETECTION####
         if mode == "M":
