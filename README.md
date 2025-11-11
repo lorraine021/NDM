@@ -82,7 +82,7 @@ For the detection model, two training noise sets are required.
 
 ## ✨ Running NDM Framework
 
-### SDv1.4 / SDv1.5
+### SDv1.4
 ```bash
 python run_sd1.py --dataset xx --mode xx
 ```
