@@ -78,7 +78,12 @@ For the detection model, two training noise sets are required.
 
     - Location: 'save_latent_folder' in run_{}.py
 
-    - Action: You need to get noise sets from the download link and ensure the files are placed in the 'save_latent_folder'.
+    - Action: You need to get noise sets from the download link and ensure the files are placed in the 'save_latent_folder'. 
+    
+    - Download: The noise sets for SD v1.5 with **Detect Seed 10** are available on [Google Drive](https://drive.google.com/drive/folders/1LLVMpoeENzSsOQvh_vHRyxQSs3Za-jRO?usp=drive_link). For noise sets corresponding to other configurations, please contact us at yt_sun@buaa.edu.cn.
+
+**Important:** Different diffusion models require their own model-specific noise sets, which are not interchangeable. Ensure that the detection seed matches the provided noise sets during detection.
+
 
 ## ✨ Running NDM Framework
 
